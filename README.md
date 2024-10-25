@@ -77,16 +77,28 @@ On 18 oct 2024 - Middleware
 ===========================================================================
     2. Topic- Middleware
 
+        //Middleware
+        const middleware = (req, res, next/cb) =>{
+
+        };
+        req - 
+        res - 
+        next/cb - 
+
+        //router
         serrot.get('/',(req, res)=>{
         res.send('Welcome to New Api')
         });
-
         req- user side request
         res- server side request/developer side 
 }
 
 On 21 oct 2024 - Route level middleware, File uploadation
 {
+    //Trafic distribution through multiple "Router"
+
+    //file Uploadation
+        ----Multer 
 
 }
 
