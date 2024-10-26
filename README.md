@@ -13,14 +13,17 @@ On 17 oct 2024 - Create server with Express.js
     in Express.js define first method and then Route
     Ex- express.get('/', (req, res)=>{
     });
-
-===================================================================
+}
+==================================================================
+{
     While Creating API :- occur two case
         case 1. same two method but
                 different both Route
         case 2. same two Route but 
                 different both method
+}
 ===================================================================
+{
     Way to send data
     1. Query - Not part of url
                Send multiple date 
@@ -32,7 +35,9 @@ On 17 oct 2024 - Create server with Express.js
                 server can define key
 
      Ex- http://localhost:3300/name=jubeda
+}
 ===================================================================
+{
     Export and Import
     1. for object export
         module.export = PersonalDetails;
