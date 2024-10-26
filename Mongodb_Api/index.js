@@ -47,7 +47,7 @@ serverRoute.post('/insert-products', multerResponce, async (req, res)=>{
     }
 
         const collection = await connet();
-
+  
         const response = await collection.insertOne(data);
 
         res.status(200).json({message: 'insert-products Process Done Succesfully', data: response });
