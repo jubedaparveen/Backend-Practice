@@ -47,6 +47,7 @@ serverRoute.post('/insert-products', multerResponce, async (req, res)=>{
     }
 
         const collection = await connet();
+        
   
         const response = await collection.insertOne(data);
 
