@@ -1,30 +1,31 @@
 # Backend-Practice
-In this repository i'm gonna to practice Backend (Express.js, Node.js, MongoDB,Api creation, Api Integration, AWS)
+<h2> In this repository i'm gonna to practice Backend (Express.js, Node.js, MongoDB,Api creation, Api Integration, AWS)</h2>
 
-On 16 oct 2024 - Create a Simple Server.
+<h3> On 16 oct 2024 - Create a Simple Server </h3> <br>
 {
     Today i learn how to create Server with Http, use createServer method, 
     What is Controler and why use res.end
 }
 
-On 17 oct 2024 - Create server with Express.js 
+<h3> On 17 oct 2024 - Create server with Express.js </h3> <br>
 {
 
     in Express.js define first method and then Route
     Ex- express.get('/', (req, res)=>{
     });
 }
+
 ==================================================================
 {
-    While Creating API :- occur two case
-        case 1. same two method but
-                different both Route
-        case 2. same two Route but 
-                different both method
+    While Creating API :- occur two case<br>
+        case 1. same two method but<br>
+                different both Route<br>
+        case 2. same two Route but <br>
+                different both method<br>
 }
 ===================================================================
 {
-    Way to send data
+    Way to send data <br>
     1. Query - Not part of url
                Send multiple date 
                user can define key
@@ -38,7 +39,7 @@ On 17 oct 2024 - Create server with Express.js
 }
 ===================================================================
 {
-    Export and Import
+    Export and Import <br>
     1. for object export
         module.export = PersonalDetails;
     
@@ -55,7 +56,7 @@ On 17 oct 2024 - Create server with Express.js
         }
 } 
 
-On 18 oct 2024 - Middleware
+<h3> On 18 oct 2024 - Middleware </h3> <br>
 {
     1. fs file concept
         show path of dir and file
@@ -100,7 +101,7 @@ On 18 oct 2024 - Middleware
         res- server side request/developer side 
 }
 
-On 21 oct 2024 - Route level middleware, File uploadation
+<h3> On 21 oct 2024 - Route level middleware, File uploadation </h3> <br>
 {
     //Trafic distribution or control through multiple "Router" And "Middleware"
 
@@ -109,7 +110,7 @@ On 21 oct 2024 - Route level middleware, File uploadation
 
 }
 
-On 22 oct 2024 - Database(MongoDB)
+<h3> On 22 oct 2024 - Database(MongoDB) </h3> <br>
 {
     Create - connecton between database(MongoDB) and aplication 
     Create - Database
@@ -155,15 +156,40 @@ On 22 oct 2024 - Database(MongoDB)
 
 }
 
-On 23 oct 2024 - MongoDB Api - Read and Insert Api
+<h3> On 23 oct 2024 - MongoDB Api - Read and Insert Api </h3> <br>
 {
     Essential steps to Follow--
 
     1. install MongoDB, Express, Multer
 }
 
-On 25 oct 2024 - MongoDB Api - Delete and Update Api
+<h3> On 25 oct 2024 - MongoDB Api - Delete and Update Api </h3> <br>
 {
     Essential steps to Follow--
     1. 
+}
+
+<h3> On 26 oct 2024 - Mongoose  </h3> <br>
+{
+    method -post- create-user
+                   const data = new User(req.body);
+                   const saveResponse = await data.save(); 
+
+            put - Update-user
+                const response = await User.updateOne(
+                    req.params,
+                    {
+                        $set:req.body
+                    }
+
+            delete - delete-user
+                 const response = await User.deleteOne(req.params);
+   
+            get - read-user
+                const response = await User.find();    
+}
+<h3> On 28 oct 2024 - Admin-Panel </h3> <br>
+{
+    Start Concept of MVC (Model, View, Controller, )
+    
 }

@@ -9,12 +9,13 @@ const serverRoute = express();
 const url = 'mongodb://localhost:27017';
 const dbname = 'jubeda_283';
 const client = new mongodb.MongoClient(url);
-const connet = async ()=>{
+const connect = async ()=>{
     await client.connect();
     const db = client.db(dbname);
     const collection = db.collection('pruducts');
     return collection;
 }
+
 
 // creating mlter 
 const multerResponce = multer({storage: multer.diskStorage({
@@ -34,7 +35,9 @@ const multerResponce = multer({storage: multer.diskStorage({
 // insert router
 serverRoute.post('/insert-products', multerResponce, async (req, res)=>{
     // console.log(req.files)
+
    try {
+
     // console.log(req.body);
     // console.log(req.files);
 
@@ -45,10 +48,8 @@ serverRoute.post('/insert-products', multerResponce, async (req, res)=>{
 
         if(req.files.images) data.images = req.files.images.map((file) => file.filename);
     }
+        const collection = await connect();
 
-        const collection = await connet();
-        
-  
         const response = await collection.insertOne(data);
 
         res.status(200).json({message: 'insert-products Process Done Succesfully', data: response });
@@ -59,7 +60,14 @@ serverRoute.post('/insert-products', multerResponce, async (req, res)=>{
    }
 });
 
-//serveer
+
+//read products
+serverRoute.get()
+//delete products
+//update products
+
+
+//server
 serverRoute.listen(5500, ()=>{
     console.log('Server is Runing on port 5500');
 });
