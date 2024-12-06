@@ -17,7 +17,7 @@
 
 ==================================================================
 {
-    While Creating API :- occur two case<br>
+    <br>While Creating API :- occur two case<br>
         case 1. same two method but<br>
                 different both Route<br>
         case 2. same two Route but <br>
@@ -25,7 +25,7 @@
 }
 ===================================================================
 {
-    Way to send data <br>
+    <br>Way to send data <br>
     1. Query - Not part of url
                Send multiple date 
                user can define key
@@ -39,7 +39,7 @@
 }
 ===================================================================
 {
-    Export and Import <br>
+    <br>Export and Import <br>
     1. for object export
         module.export = PersonalDetails;
     
@@ -58,7 +58,7 @@
 
 <h3> On 18 oct 2024 - Middleware </h3> <br>
 {
-    1. fs file concept
+    <br>1. fs file concept
         show path of dir and file
             console.log(__dirname, __filename) 
 
@@ -83,7 +83,7 @@
         //delete file
             Ex- fs.unlinkSync('./public/hello.html');
 ===========================================================================
-    2. Topic- Middleware
+    <br>2. Topic- Middleware
 
         //Middleware
         const middleware = (req, res, next/cb) =>{
@@ -191,5 +191,5 @@
 <h3> On 28 oct 2024 - Admin-Panel </h3> <br>
 {
     Start Concept of MVC (Model, View, Controller, )
-    
+
 }
