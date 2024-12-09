@@ -6,10 +6,10 @@ const ProductSchema = new mongoose.Schema({
     short_description:String,
     thumbnail:String,
     secondary_thumbnail:String,
-    images:String,
+    images:Object,
     // product_gallery:String,
-    price:String,
-    mrp:String,
+    price:Number,
+    mrp:Number,
     parent_category:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'parent_Category'

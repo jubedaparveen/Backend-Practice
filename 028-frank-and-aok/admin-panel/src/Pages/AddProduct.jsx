@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Select from "react-select/base";
+import Select from "react-select";
 
 const AddProduct = () => {
   const [activeParentCategory, setActiveParentCategory] = useState([]);
@@ -39,12 +39,13 @@ const AddProduct = () => {
   const fetchColors = () => {
     axios.get(`${process.env.REACT_APP_API_URL}admin-panel/Colors/active-colors`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         const newArr = response.data.data.map((color) => ({
           ...color,
           value: color._id,
-          label: color.name,
+          label: color.color,
         }));
+        console.log('colors =>',newArr)
         setColors(newArr);
       })
       .catch((error) => {

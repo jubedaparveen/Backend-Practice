@@ -4,9 +4,9 @@ const ProductRouter = express.Router();
 
 const multerUpload = require('../../middleware/multer');
 
-const { createProductCategoryController } = require('../../controllers/controllersjunction');
+const { createProductController } = require('../../controllers/controllersjunction');
 
 
-ProductRouter.post('/create-product', multerUpload, createProductCategoryController);
+ProductRouter.post('/create-product', multerUpload, createProductController);
 
 module.exports = ProductRouter;

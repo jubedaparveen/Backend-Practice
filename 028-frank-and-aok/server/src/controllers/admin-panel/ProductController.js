@@ -12,8 +12,12 @@ const createProductController = async (req, res) =>{
 
             if(req.files.images) data.images = req.files.images.map((image)=> image.filename);
         }
+
+        // console.log(data);
         const datasave = new ProductModel(data);
         const response = await datasave.save();
+
+        res.status(200).json({message: 'success', data: response});
     }
     catch(error){
         console.log(error);
