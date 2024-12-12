@@ -38,10 +38,10 @@ const singleDeleteColorController = async (req, res) => {
     }
 };
 
-
 const activeColorsController = async (req, res) => {
     try { 
         const response = await ColorsModel.find({deleted_at:null, status:true});
+        console.log(response);
         res.status(200).json({message: 'success', data: response });
      }
     catch (error) {
@@ -49,6 +49,8 @@ const activeColorsController = async (req, res) => {
         res.status(500).json({ message: 'internal server error' });
     }
 }
+
+
 
 module.exports = {
     addColorController,

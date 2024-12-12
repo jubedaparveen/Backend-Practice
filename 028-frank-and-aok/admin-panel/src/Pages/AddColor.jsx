@@ -47,8 +47,6 @@ function AddColor() {
 
   const handleAddColor = (e) => {
     e.preventDefault();
-    
-
     axios.post(`${process.env.REACT_APP_API_URL}admin-panel/Colors/add-Color`, {
       color: e.target.color.value,
       colorcode: e.target.colorcode.value

@@ -1,14 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Select from "react-select/base";
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
+  const Navigation = useNavigate();
   const [activeParentCategory, setActiveParentCategory] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedColors, setSelectedColors] = useState(null);
+  const [selectedColorsOption, setSelectedColorsOption] = useState(null);
 
   const fatchActiveParentCategoey = () => {
     axios
@@ -43,7 +46,7 @@ const AddProduct = () => {
         const newArr = response.data.data.map((color) => ({
           ...color,
           value: color._id,
-          label: color.name,
+          label: color.color,
         }));
         setColors(newArr);
       })
@@ -51,6 +54,8 @@ const AddProduct = () => {
         console.log(error);
       });
   };
+
+  console.log(colors, 'colors');
 
   const fetchSizes = () => {
     axios.get(`${process.env.REACT_APP_API_URL}admin-panel/Sizes/active-sizes`)
@@ -80,6 +85,29 @@ const AddProduct = () => {
     axios.post(`${process.env.REACT_APP_API_URL}admin-panel/products/create-product`, e.target)
       .then((response) => {
         console.log(response.data);
+        let timerInterval;
+          Swal.fire({
+            title: "Product added!",
+            html: "Redirected to view Product View page in <b></b> milliseconds.",
+            timer: 600,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              Navigation('/dashboard/products/view-product');
+            }
+          });
+
       })
       .catch((error) => {
         console.log(error);
@@ -102,8 +130,7 @@ const AddProduct = () => {
               id="name"
               name="name"
               placeholder="Product Name"
-              className="w-full input border p-2 rounded-[5px] my-[10px]"
-            />
+              className="w-full input border p-2 rounded-[5px] my-[10px]"/>
           </div>
 
           <div className="w-full my-[10px]">
@@ -116,8 +143,7 @@ const AddProduct = () => {
               placeholder="Description"
               rows={3}
               cols={10}
-              className="w-full input border p-2 rounded-[5px] my-[10px]"
-            />
+              className="w-full input border p-2 rounded-[5px] my-[10px]"/>
           </div>
 
           <div className="w-full my-[10px]">
@@ -271,14 +297,14 @@ const AddProduct = () => {
             </div>
 
             <div>
-              <label htmlFor="color" className="block text-[#303640]">
+              <label htmlFor="color" className="block mb-3 text-[#303640]">
                 Color </label>
                 <Select
                 name='color'
-                defaultValue={selectedColors}
-                onChange={setSelectedColors}
+                defaultValue={selectedColorsOption}
+                onChange={setSelectedColorsOption}
                 options={colors}
-                isMulti/>
+                isMulti />
             </div>
           </div>
 

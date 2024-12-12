@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-    name:String,
-    description:String,
-    short_description:String,
-    thumbnail:String,
-    secondary_thumbnail:String,
-    images:String,
+    name: String,
+    description: String,
+    short_description: String,
+    thumbnail: String,
+    secondary_thumbnail: String,
+    images: Object,
     // product_gallery:String,
-    price:String,
-    mrp:String,
+    price: Number,
+    mrp: Number,
     parent_category:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'parent_Category'

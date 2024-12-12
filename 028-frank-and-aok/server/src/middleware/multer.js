@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const multerupload = multer({storage}).fields([
     {name: 'thumbnail', maxCount: 1},
     {name: 'secondary_thumbnail', maxCount: 1},
-    {name :'images', maxCount:10}
+    {name: 'images', maxCount: 10}
 ]);
 
 module.exports = multerupload;

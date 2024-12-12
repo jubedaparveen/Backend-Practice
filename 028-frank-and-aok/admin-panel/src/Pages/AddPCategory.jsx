@@ -49,7 +49,9 @@ const AddPCategory = () => {
               Navigation('/dashboard/products/view-category');
             }
           });
+          
         })
+
         .catch((error) => {
           console.error(error);
           if (error.status === 400) {

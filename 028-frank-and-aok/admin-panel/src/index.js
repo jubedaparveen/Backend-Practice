@@ -64,7 +64,7 @@ const routes = createBrowserRouter( createRoutesFromElements([
 
     <Route path="/dashboard/products/add-product"   element={<AddProduct />} />
     <Route path="/dashboard/products/view-product"  element={<ViewProduct />}/>,
-    <Route path="/dashboard/products/update-product"element={<UpdateProduct />}/>,
+    <Route path="/dashboard/products/update-product/:id"element={<UpdateProduct />}/>,
 
     <Route path="/dashboard/stories/add-story"      element={<StoryDetails />} />,
     <Route path="/dashboard/stories/view-story"     element={<ViewStory />} />,

@@ -83,6 +83,7 @@ const ViewCategory = () => {
           })
       }
     });
+    
   };
 
   const handleSingleCheckCategory = (e) => {
