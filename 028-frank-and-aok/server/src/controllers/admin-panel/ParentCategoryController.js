@@ -20,7 +20,7 @@ const ParentCategoryController = async (req, res)=>{
 const readParentCategoryController = async (req, res) => {
     try{ 
         const readData = await parentCategoryModel.find()
-        res.status(200).json({message: 'success', readData });
+        res.status(200).json({message: 'success', data: readData });
     }
     catch(error){
         console.log(error);

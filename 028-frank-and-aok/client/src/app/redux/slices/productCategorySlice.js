@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const  fetchProductCategory = createAsyncThunk(
-    'parentCategory/fetchProductCategory',
+    'productCategory/fetchProductCategory',
     async (_, thunkApi) => {
         try{
-            const response = await axios.get('http://localhost:4800/api/website/product-category/active-categories');
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}website/product-categoryweb/active-product-categoryWeb`);
             return response.data;
         }
         catch(error){

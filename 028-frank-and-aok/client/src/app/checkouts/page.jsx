@@ -7,6 +7,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 export default function Checkout() {
   let [orderSummary, setOrderSummary] = useState(false);
+
   const [cart, setCart] = useState([]);
   const [filepath, setFilepath] = useState('');
   const [items, setItems] = useState(null);
@@ -44,7 +45,7 @@ export default function Checkout() {
     })
     console.log('cart checkout', formObject, cart);
 
-    axios.post('http://localhost:4800/api/website/payment/create-checkout', {
+    axios.post(`${process.env.NEXT_PUBLIC_URL}website/payment/create-checkout`, {
       address: formObject,
       cart,
       totalPrice
@@ -65,7 +66,7 @@ export default function Checkout() {
 
   return (
     <>
-      <header className="w-full border-b border-customBorder py-2 font-Poppins">
+      <header className="w-full border-b border-customBorder py-16 font-Poppins">
         <div className="max-w-[1150px] mx-auto flex items-center justify-between">
           <div className="font-bold text-[36px]">Frank And Oak</div>
           <IoBagHandleOutline size={30} />
@@ -144,8 +145,7 @@ export default function Checkout() {
                 </button>
                 <button
                   type="button"
-                  class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
-                >
+                  class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
                   <img className="me-2" src="images/dark_gpay.svg" alt="" />
                   Google Pay
                 </button>
@@ -278,6 +278,7 @@ export default function Checkout() {
                   <option value="gujrat">Gujrat</option>
                   <option value="maharashtra">Maharashtra</option>
                   <option value="delhi">Delhi</option>
+                  <option value="delhi">Madhya Pardesh</option>
                 </select>
                 <div class="relative">
                   <input
@@ -379,7 +380,7 @@ export default function Checkout() {
                          { cartItem.product.name}
                         </h6>
                         <span className="text-[12px] font-normal text-[#0000008f]">
-                          {cartItem.size.name}
+                          {cartItem.sizes.name}
                         </span>
                       </div>
                       <div className="text-sm font-normal">

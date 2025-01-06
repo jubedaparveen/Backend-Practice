@@ -15,6 +15,9 @@ const cors = require('cors');
     server.use(cors());
 
     server.use('/fran-and-oak-admin-files', express.static('./src/uploadfiles'));
+    server.use('/frank-and-oak-files', express.static('./src/uploadfiles'));
+    server.use('/fran-and-oak', express.static('./src/uploadfiles'));
+    server.use('/fran-and-oak-order', express.static('./src/uploadfiles'));
 
 //Router link
     server.use('/allApi', allRouters)

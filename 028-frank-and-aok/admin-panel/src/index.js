@@ -33,38 +33,41 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import ViewColor from "./Pages/ViewColor";
 import UpdateColor from "./Pages/UpdateColor";
 import AddColor from "./Pages/AddColor";
+import ResetPassword from "./Pages/ResetPassword";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const routes = createBrowserRouter( createRoutesFromElements([
   <Route path="/"               element={<App />} />,
   <Route path="/reset-password" element={<ForgotPassword />} />,
+  <Route path="/resetpassword/:_id"  element={<ResetPassword />} />,
+  
 
   <Route path="/dashboard" element={<Layout />}>,
 
     <Route path=""                   element={<Home />} />,
     <Route path="/dashboard/profile" element={<Profile />} />,
 
-    <Route path="/dashboard/color/add-colors"    element={<AddColor />} />,
-    <Route path="/dashboard/color/view-colors"   element={<ViewColor />} />,
-    <Route path="/dashboard/color/update-colors" element={<UpdateColor />} />,
+    <Route path="/dashboard/color/add-colors"        element={<AddColor />} />,
+    <Route path="/dashboard/color/view-colors"       element={<ViewColor />} />,
+    <Route path="/dashboard/color/update-colors/:id" element={<UpdateColor />} />,
 
-    <Route path="/dashboard/size/add-sizes"    element={<AddSizes />} />,
-    <Route path="/dashboard/size/view-sizes"   element={<ViewSizes />} />,
-    <Route path="/dashboard/sizes/update-size" element={<UpdateSizes />} />,
+    <Route path="/dashboard/size/add-sizes"        element={<AddSizes />} />,
+    <Route path="/dashboard/size/view-sizes"       element={<ViewSizes />} />,
+    <Route path="/dashboard/sizes/update-size/:id" element={<UpdateSizes />} />,
 
     <Route path="/dashboard/category/add-category"       element={<AddCategory />}/>,
     <Route path="/dashboard/category/view-category"      element={<ViewCategory />}/>,
     <Route path="/dashboard/category/update-category/:id"element={<UpdateCategory />}/>,
 
-    <Route path="/dashboard/products/add-p-category"    element={<AddPCategory />}/>,
-    <Route path="/dashboard/products/view-category"   element={<ViewPCategory />}/>,
+    <Route path="/dashboard/products/add-p-category"      element={<AddPCategory />}/>,
+    <Route path="/dashboard/products/view-category"       element={<ViewPCategory />}/>,
     <Route path="/dashboard/products/update-category/:id" element={<UpdatePCategory />}/>,
    
 
-    <Route path="/dashboard/products/add-product"   element={<AddProduct />} />
-    <Route path="/dashboard/products/view-product"  element={<ViewProduct />}/>,
-    <Route path="/dashboard/products/update-product/:id"element={<UpdateProduct />}/>,
+    <Route path="/dashboard/products/add-product"        element={<AddProduct />} />
+    <Route path="/dashboard/products/view-product"       element={<ViewProduct />}/>,
+    <Route path="/dashboard/products/update-product/:id" element={<UpdateProduct />}/>,
 
     <Route path="/dashboard/stories/add-story"      element={<StoryDetails />} />,
     <Route path="/dashboard/stories/view-story"     element={<ViewStory />} />,

@@ -12,13 +12,22 @@ const {
     UpdateSizeStatusController,
     singleDeleteSizeController,
     activeSizesController,
+    readEditSizeController,
+    editUpdateSizeController,
+    multiDeleteController,
 } = require('../../controllers/controllersjunction');
 
 SizesRouter.post('/add-sizes', addSizesController);
-SizesRouter.get('/read-size', readSizeController);
+SizesRouter.get('/read-size', readSizeController);// view page
+
 SizesRouter.put('/update-size-status/:_id', UpdateSizeStatusController);
-SizesRouter.delete('/single-delete-size:_id', singleDeleteSizeController)
-SizesRouter.get('/active-sizes', activeSizesController )
+
+SizesRouter.get('/read-edit-size/:_id', readEditSizeController);
+SizesRouter.put('/edit-update-size/:_id', editUpdateSizeController);
+
+SizesRouter.delete('/single-delete-size:_id', singleDeleteSizeController);
+SizesRouter.put('/multi-delete', multiDeleteController)
+SizesRouter.get('/active-sizes', activeSizesController );
 
 
 

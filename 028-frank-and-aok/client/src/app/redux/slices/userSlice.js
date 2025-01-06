@@ -1,11 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// export const userLogin = createAsyncThunk(
+//     'user/Login',
+//     async (auth, thunkApi)=>{
+//         try{
+//             const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}website/user-register/user-login`, {auth});
+//             return response.data;
+//         }
+//         catch(error){
+//             return thunkApi.rejectWithValue(error.message);
+//         }
+//     }
+// );
+
 export const verifyLogin = createAsyncThunk(
     'user/verifyLogin',
     async (auth, thunkApi)=>{
         try{
-            const response = await axios.post('http://localhost:4800/api/website/users/verify-login', {auth});
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}website/user-register/verify-jwt-login`, {auth});
             return response.data;
         }
         catch(error){
@@ -21,7 +34,7 @@ const initialState = {
 };
 
 export const userSlice = createSlice({
-    name: 'user',
+    name: 'users',
     initialState,
     reducers: {
         setUser : (state, action)=>{

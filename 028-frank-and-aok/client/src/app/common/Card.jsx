@@ -14,26 +14,31 @@ export function Card({ product, filepath }) {
   const userData = useSelector((state)=> state.user.value);
   const dispatch = useDispatch();
 
+  
   useEffect(()=>{
+    console.log(product);
+  console.log(filepath);
     if(userData.data) setUser(userData.data);
   },[userData]);
 
   useEffect(() => {
-    setSelectedColor(product.colors[0]._id)
+    setSelectedColor(product.color[0]._id)
   }, [product]);
 
-  const handleAddToCart = (size)=>{
+
+  const handleAddToCart = (sizes)=>{
     const data = {
       user:user._id,
       product: product._id,
-      size,
+      sizes,
       color:selectedColor,
     };
     
-    axios.post('http://localhost:4800/api/website/cart/create-cart', data)
+    axios.post(`${process.env.NEXT_PUBLIC_URL}website/cart/create-cart`, data)
     .then((response)=>{
       console.log(response.data);
       dispatch(fetchCart(user._id));
+      console.log(user._id, 'user-id')
     })
     .catch((error)=>{
       console.log(error);
@@ -48,11 +53,11 @@ export function Card({ product, filepath }) {
           <img className='h-full w-full object-cover' src={filepath + product.thumbnail} alt="Womens Denim" />
           <img className='h-full w-full duration-300 z-[999] absolute top-0 group-hover:block hidden object-cover'
             src={filepath + product.secondary_thumbnail} alt="Womens Denim" />
-          <button className={` w-[95%] text-center box-border bg-white py-3 text-[14px] font-medium absolute bottom-2 z-[99999] left-0 bottom-0 `}>Quick Add
-            <div className="py-1 bg-black hidden group-hover:flex flex-wrap justify-around gap-2 absolute bottom-0 w-full z-[999999] min-h-[100%]">
+          <button className={` w-[95%] text-center box-border bg-white py-3 text-[14px] font-medium absolute bottom-2 z-[99999] left-0  `}>Quick Add
+            <div className="py-1 bg-black hidden group-hover:flex flex-wrap justify-around gap-2 absolute bottom-0 w-full z-[999999] min-h-[100%] ">
               {
                 product.sizes.map((size, index) => (
-                  <button onClick={()=>{handleAddToCart(size._id)}} className="uppercase py-2 bg-white w-[19%]" key={index}>{size.name}</button>
+                  <button onClick={()=>{handleAddToCart(size._id)}} className="uppercase py-2 bg-white w-[19%] rounded-full" key={index}>{size.name}</button>
                 ))
               }
 
@@ -68,16 +73,16 @@ export function Card({ product, filepath }) {
           <span>₹ {product.price}</span>
           <span className="ms-10 text-gray-500 line-through">₹ {product.mrp}</span>
         </div>
-        <span className='group-hover:hidden sm:text-[16px] text-[12px] block'>{product.colors.length} colors</span>
+        <span className='group-hover:hidden sm:text-[16px] text-[12px] block'>{product.color.length} colors</span>
         <div className='group-hover:flex hidden mt-1'>
           {
-            product.colors.map((color, index) => (
+            product.color.map((color, index) => (
               <div key={index}
                 style={{
-                  backgroundColor: color.code
+                  backgroundColor: color.colorcode
                 }}
                 onClick={() => { setSelectedColor(color._id) }}
-                className={`ms-4 ${(selectedColor == color._id) ? 'shadow-[0_0_2px_6px_black]' : ''}  sm:w-5 sm:h-5 h-3 w-3 rounded-full border border-black flex items-center justify-center`}></div>
+                className={`ms-4 ${(selectedColor == color._id) ? 'shadow-[0_0_1px_2px_black]' : ''}  sm:w-5 sm:h-5 h-3 w-3 rounded-full border border-black flex items-center justify-center`}></div>
             ))
           }
 

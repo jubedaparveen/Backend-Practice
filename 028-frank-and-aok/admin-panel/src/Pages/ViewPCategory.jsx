@@ -222,8 +222,7 @@ const ViewCategory = () => {
                       data-tooltip-id="status-tooltip"
                       data-tooltip-content={`Click to ${(category.status) ? ' Inactive' : ' Active'} `}
                       className={`p-[4px_10px] rounded-full text-white
-                      ${(category.status) ? 'bg-green-500' : 'bg-red-500'}  `}>
-
+                      ${(category.status) ? 'bg-green-500' : 'bg-red-500'}`} >
                       {(category.status) ? 'Active' : 'Inactive'}
 
                     </button>

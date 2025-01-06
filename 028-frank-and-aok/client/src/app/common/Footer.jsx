@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
         <div className='flex md:flex-row flex-col items-center justify-between'>
           <h6 className='text-[12px] font-medium'>© Frank And Oak 2024 , All Rights Reserved.</h6>
-          <h6 className='text-[12px] font-medium'>Created with 💖 by Roshan Chaurasia</h6>
+          <h6 className='text-[12px] font-medium'>Created with 💖 by Jubeda Parveen</h6>
         </div>
         </div>
     </footer>

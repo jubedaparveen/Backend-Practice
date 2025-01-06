@@ -7,21 +7,20 @@ const ProductSchema = new mongoose.Schema({
     thumbnail: String,
     secondary_thumbnail: String,
     images: Object,
-    // product_gallery:String,
     price: Number,
     mrp: Number,
     parent_category:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'parent_Category'
     },
-    product_category:{
+    Product_Category:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Product_Category'
     },
     brand:String,
-    size:[{
+    sizes:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Sizes'
+        ref:'sizes'
     }],
     color:[{
         type:mongoose.Schema.Types.ObjectId,
@@ -52,6 +51,6 @@ ProductSchema.pre('updateOne', function(){
 })
 
 // parent_Category is collection name
-const ProductModels = mongoose.model('Product', ProductSchema);
+const ProductModels = mongoose.model('products', ProductSchema);
 
 module.exports = ProductModels; 

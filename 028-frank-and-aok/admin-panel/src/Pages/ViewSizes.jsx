@@ -8,8 +8,8 @@ import { Tooltip } from "react-tooltip";
 
 const ViewSizes = () => {
   const [sizes, setSizes] = useState([]);
-
-  
+  const [checkedBox, setCheckedBox] = useState([]);
+  const [ifAllChecked, setAllChecked] = useState(false);
 
   const handeFatchSizesData = () => {
     axios.get(`${process.env.REACT_APP_API_URL}admin-panel/Sizes/read-size`)
@@ -77,6 +77,58 @@ const ViewSizes = () => {
     });
   };
 
+  const handleSingleCheckBox = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setCheckedBox([value, ...checkedBox])
+    } else {
+      setCheckedBox(checkedBox.filter((cat) => cat !== value));
+    }
+  };
+
+  const handleAllCheckBox = (e) => {
+    if (e.target.checked) {
+      setCheckedBox(sizes.map((cat) => cat._id));
+      setAllChecked(true);
+    } else {
+      setCheckedBox([]);
+      setAllChecked(false);
+    }
+  };
+
+  useEffect(() => {
+      setAllChecked(sizes.length === checkedBox.length && sizes.length !== 0);
+    }, [checkedBox, sizes]);
+
+    const handleMultiDelete = (e) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+  
+          axios.put(`${process.env.REACT_APP_API_URL}admin-panel/Sizes/multi-delete`, { checkedBox })
+            .then((response) => {
+              handeFatchSizesData();
+  
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+        }
+      });
+    }
+
   return (
     <div className="w-[90%] bg-white mx-auto border rounded-[10px] my-[150px]">
       <span className="block border-b rounded-[10px_10px_0_0] bg-slate-600 uppercase text-white h-[50px] p-[8px_16px] text-[23px] font-bold">
@@ -87,12 +139,14 @@ const ViewSizes = () => {
           <thead>
             <tr className="text-left border-b">
               <th>
-                <button
+                <button onClick={handleMultiDelete}
                   className="bg-slate-600 uppercase text-sm rounded-full px-3 py-1 text-white" > Delete
                 </button>
                 <input
                   type="checkbox"
                   name="deleteAll"
+                  onClick={handleAllCheckBox}
+                  checked={ifAllChecked}
                   className="m-[0_10px] accent-[#5351c9] cursor-pointer input" />
               </th>
               <th className="text-sm uppercase">Sno</th>
@@ -111,7 +165,10 @@ const ViewSizes = () => {
                     <input
                       type="checkbox"
                       name="delete"
-                      className="accent-[#5351c9] cursor-pointer input" />
+                      className="accent-[#5351c9] cursor-pointer input" 
+                      value={sizes._id}
+                      onClick={handleSingleCheckBox}
+                      checked={checkedBox.includes(sizes._id)}/>
                   </td>
 
                   <td>{index + 1}</td>
@@ -121,7 +178,7 @@ const ViewSizes = () => {
                     <MdDelete className="my-[5px] text-red-500 cursor-pointer"
                       onClick={() => { handleSingleDeleteSize(sizes._id) }} />
                     ||
-                    <Link to="/dashboard/sizes/update-size">
+                    <Link to={`/dashboard/sizes/update-size/${sizes._id}`}>
                       <CiEdit className="my-[5px] text-yellow-500 cursor-pointer" />
                     </Link>
                   </td>

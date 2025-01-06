@@ -79,7 +79,7 @@ function CartProducts({filepath, product}) {
   const dispatch = useDispatch();
 
   const handleDeleteCart = (id)=>{
-    axios.delete(`http://localhost:4800/api/website/cart/delete-cart/${id}`)
+    axios.delete(`${process.env.NEXT_PUBLIC_URL}website/cart/delete-cart/${id}`)
     .then((response)=>{
       console.log(response.data);
       dispatch(fetchCart(product.user._id));
@@ -94,7 +94,7 @@ function CartProducts({filepath, product}) {
 
     const quantity = (e.target.textContent === '+') ? product.quantity + 1 : product.quantity - 1;
 
-    axios.put(`http://localhost:4800/api/website/cart/update-cart/${e.target.value}`, {quantity})
+    axios.put(`${process.env.NEXT_PUBLIC_URL}website/cart/update-cart/${e.target.value}`, {quantity})
     .then((response)=>{
       console.log(response.data);
       dispatch(fetchCart(product.user._id));
@@ -113,7 +113,7 @@ function CartProducts({filepath, product}) {
             <h5 className='text-sm font-semibold'>{product.product.name}</h5>
             <MdClose onClick={()=>{handleDeleteCart(product._id)}} size={20} />
           </div>
-          <div className='font-semibold text-[12px] text-customGray'>Size: {product.size.name}</div>
+          <div className='font-semibold text-[12px] text-customGray'>Size: {product.sizes.name}</div>
           <div className='text-[12px] mt-1.5 text-customGray font-medium flex items-center gap-1 underline underline-offset-2'>Move to Wishlist <CiHeart size={16} /></div>
         </div>
         <div className='flex items-center justify-between'>

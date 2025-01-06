@@ -18,9 +18,8 @@ const addSizesController = async (req, res) =>{
     }
 };
 
-//for get data from database
+//for get data from database {view page}
 const readSizeController = async (req, res) =>{
-
     try{
         const data = await SizesModel.find();
         res.status(200).json({message : 'Success', data});
@@ -29,9 +28,9 @@ const readSizeController = async (req, res) =>{
         console.log(error);
         res.status(500).json({message : 'Internal server Error'});
     }
-
 };
 
+// Update Status either active and inactive
 const UpdateSizeStatusController = async (req, res) => {
     try{ 
         const data = await SizesModel.updateOne(req.params,{ $set:req.body });
@@ -65,10 +64,56 @@ const activeSizesController = async (req, res) => {
     }
 }
 
+const readEditSizeController = async (req, res) =>{
+    try{
+        const data = await SizesModel.findOne(req.params);
+        res.status(200).json({message : 'Size Updated Successfully', data});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({massge : 'Internal Server Error'})
+    }
+};
+
+const editUpdateSizeController = async (req, res) =>{
+    try{
+        const data = await SizesModel.updateOne(
+            req.params, 
+            {
+                $set: req.body
+            }
+        );
+
+        res.status(200).json({message: 'Size Updated Succssfully', data});
+    }
+    catch(error){
+        console.log(error);
+
+        res.status(500).json({message: 'Internal Server Error'});
+    }
+};
+
+// const data = await ParentCategory.deleteMany({_id: {$in: req.body.checkedCategories}});
+        // res.status(200).json({message: 'success'});
+
+const multiDeleteController = async (req, res) =>{
+    try{
+        const data = await SizesModel.deleteMany({_id: {$in: req.body.checkedBox}});
+        res.status(200).json({message: 'All Checked Box Delete Successfully'})
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message : 'Internal Server Error'})
+    }
+};
+
 module.exports = {
     addSizesController,
     readSizeController,
     singleDeleteSizeController,
     UpdateSizeStatusController,
-    activeSizesController
+    activeSizesController,
+    readEditSizeController,
+    editUpdateSizeController,
+    multiDeleteController
 };

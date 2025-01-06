@@ -210,7 +210,9 @@ function DashboardSideNav() {
             </Link>
           </ul>)}
         </li>
-        <li className="w-full grid grid-cols-[20%_auto_10%] px-[12px] py-[10px] rounded-[5px] hover:bg-[#515151]  cursor-pointer mb-[5px] box-border" onClick={() => setStory(!story)}>
+
+        <li className="w-full grid grid-cols-[20%_auto_10%] px-[12px] py-[10px] rounded-[5px] hover:bg-[#515151]  cursor-pointer mb-[5px] box-border" 
+        onClick={() => setStory(!story)}>
           <span className="icon">
             <RxCountdownTimer className="text-[#ffffff6a] w-full my-[5px]" />
           </span>
@@ -220,20 +222,24 @@ function DashboardSideNav() {
           (<IoIosArrowUp className="m-1 text-[#ffffff6a]" />)}
           {story === false ? ("") : 
           (<ul className="w-[230px] ">
+
             <Link to="/dashboard/stories/add-story">
               <li className="w-full grid grid-cols-[20%_auto] hover:bg-[#515151]  rounded-[5px] my-[5px] p-[10px]">
                 <FaRegCircle className="text-[#ffffff6a] w-full mt-[5px] p-1 text-[14px]" />
                   <span> Story Details </span>
               </li>
             </Link>
+           
             <Link to="/dashboard/stories/view-story">
               <li className="w-full grid grid-cols-[20%_auto] hover:bg-[#515151]  rounded-[5px] my-[5px] p-[10px]">
                 <FaRegCircle className="text-[#ffffff6a] w-full  mt-[5px] p-1 text-[14px]" />
                   <span> Story View </span>
               </li>
             </Link>
+
             </ul>)}
         </li>
+
         <Link to="/dashboard/orders">
           <li className="w-full grid grid-cols-[20%_auto] px-[12px] py-[10px] hover:text-white rounded-[5px] hover:bg-[#515151]  cursor-pointer mb-[5px] box-border">
             <span className="icon">
@@ -242,6 +248,7 @@ function DashboardSideNav() {
             <span className="w-full px-2"> Order </span>
           </li>
         </Link>
+
         <li className="w-full grid grid-cols-[20%_auto_10%] px-[12px] py-[10px] rounded-[5px] hover:bg-[#515151]  cursor-pointer mb-[5px] box-border" onClick={() => setSlider(!slider)} >
           <span className="icon">
             <RxCountdownTimer className="text-[#ffffff6a] w-full my-[5px]" />

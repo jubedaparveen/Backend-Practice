@@ -2,38 +2,50 @@ import React from "react";
 
 export function ThisJustInMegaMenu({menuHover,setMenuHover}) {
   return (
-    // 
-    <div onMouseOver={()=>setMenuHover(1)} onMouseOut={()=>setMenuHover(0)} className={`${menuHover==1 ? "opacity-100 visible" : "opacity-0 invisible"} duration-500 w-full bg-[#F9F9F9] absolute left-0 top-[100%]`}>
+    <div onMouseOver={()=>setMenuHover(1)} onMouseOut={()=>setMenuHover(0)} 
+    className={`${menuHover==1 ? "opacity-100 visible" : "opacity-0 invisible"} 
+    duration-500 w-full bg-[#F9F9F9] absolute left-0 top-[100%]`}>
+
       <div className="grid grid-cols-[28%_auto] gap-24 p-10">
         <div className="flex justify-between">
           <ul className="space-y-2">
+
             <li>
               <h4 className="text-[15px] font-medium underline underline-offset-8 pb-3">
                 Women&apos;s New Arrivals
               </h4>
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
               Shop All
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Tops
+              Tops
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Bottoms
+              Bottoms
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Jackets & Coats
+              Jackets & Coats
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Blazers
+              Blazers
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Dresses
+              Dresses
             </li>
+
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Accessories
+              Accessories
             </li>
+
           </ul>
+
           <ul className="space-y-2">
             <li>
               <h4 className="text-[15px] font-medium underline underline-offset-8 pb-3">
@@ -44,32 +56,38 @@ export function ThisJustInMegaMenu({menuHover,setMenuHover}) {
               Shop All
             </li>
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Tops
+              Tops
             </li>
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Bottoms
+              Bottoms
             </li>
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Overshirts
+              Overshirts
             </li>
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Jackets & Coats
+              Jackets & Coats
             </li>
             <li className="text-[13px] font-semibold cursor-pointer hover:underline">
-            Accessories
+              Accessories
             </li>
           </ul>
+
         </div>
+
         <div className="grid grid-cols-2 gap-10">
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Tile_desktop_90187318-a3f1-492f-9377-b18381a175a6_600x.jpg?v=1724869721" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Women&apos;s New  Arrivals</h4>
           </figure>
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Tile_desktop-1_3ac58a1d-4386-40be-a9bf-9db422c8941d_600x.jpg?v=1724869727" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Men&apos;s New  Arrivals</h4>
           </figure>
+
         </div>
+
       </div>
     </div>
   );
@@ -301,31 +319,41 @@ export function OurStoryMegaMenu({menuHover,setMenuHover}) {
   return (
     <div onMouseOver={()=>setMenuHover(4)} onMouseOut={()=>setMenuHover(0)} className={`${menuHover==4 ? "opacity-100 visible" : "opacity-0 invisible"} duration-500 w-full bg-[#F9F9F9] absolute left-0 top-[100%]`}>
       <div className="grid grid-cols-1 p-10">
+
         <div className="grid grid-cols-6 gap-7">
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Who_we_are_-_NAV_600x.jpg?v=1712763767" alt="" />
-            <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Who we are</h4>
+            <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">
+              Who we are
+            </h4>
           </figure>
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Tile_desktop_23_600x.jpg?v=1712763780" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Sustainable Practices</h4>
           </figure>
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Design_Philosophy_-_NAV_600x.jpg?v=1712763785" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Design Philosphy</h4>
           </figure>
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Fabric_Innovation_-_NAV_600x.jpg?v=1712763794" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Fabrics</h4>
           </figure>
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Circular_Process_-_NAV_600x.jpg?v=1712763798" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Circular Denim</h4>
           </figure>
+
           <figure className="w-full h-[280px] relative">
             <img className="h-full w-full cursor-pointer shadow-md object-cover object-center" src="https://www.frankandoak.com/cdn/shop/files/Partners_Factories_-_NAV_600x.jpg?v=1712763804" alt="" />
             <h4 className="text-[18px] font-medium text-white absolute bottom-5 left-5">Partners and Fabrics</h4>
           </figure>
+
         </div>
       </div>
     </div>

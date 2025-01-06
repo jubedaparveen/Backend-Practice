@@ -5,7 +5,7 @@ export const  fetchParentCategory = createAsyncThunk(
     'parentCategory/fetchParentCategory',
     async (_, thunkApi) => {
         try{
-            const response = await axios.get('http://localhost:4800/api/website/parent-category/active-categories');
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}website/parent-category/active-parent-categoriesWeb`);
             return response.data;
         }
         catch(error){

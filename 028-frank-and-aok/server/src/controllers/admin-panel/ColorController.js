@@ -19,11 +19,44 @@ const readColorController = async (req, res) => {
     try{ 
         const data = await ColorsModel.find()
         console.log(data);
-        res.status(200).json({message: 'success', data });
+        res.status(200).json({message: 'View Colors successfully', data });
     }
     catch(error){
         console.log(error);
         res.status(500).json({message : 'internal server error'})
+    }
+};
+
+const updateColorStatusController = async (req, res) =>{
+    try{
+        const data = await ColorsModel.updateOne(req.params, {$set:req.body});
+        res.status(200).json({message: 'Update Status Successfully', data});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'Internal Server Error'})
+    }
+};
+
+const readEditColorController = async (req, res) =>{
+    try{
+        const data = await ColorsModel.findOne(req.params);
+        res.status(200).json({message: 'Read Data Successfully', data});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'Internal Server Errror'});
+    }
+};
+
+const updateEditColorController = async (req, res) =>{
+    try{
+        const data = await ColorsModel.updateOne(req.params, {$set:req.body});
+        res.status(200).json({message: 'Color Updated Successfully', data});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message : 'Internal server Error'})
     }
 };
 
@@ -35,6 +68,17 @@ const singleDeleteColorController = async (req, res) => {
     catch(error){
         console.log(error);
         res.status(500).json({message : 'internal server error'})
+    }
+};
+
+const multiDeleteColorController = async (req, res) =>{
+    try{
+        const data = await SizesModel.deleteMany({_id: {$in: req.body.checkedBox}});
+        res.status(200).json({message: 'All Checked Box Delete Successfully'})
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message : 'Internal Server Error'})
     }
 };
 
@@ -52,9 +96,14 @@ const activeColorsController = async (req, res) => {
 
 
 
+
 module.exports = {
     addColorController,
     readColorController,
     singleDeleteColorController,
-    activeColorsController
+    activeColorsController,
+    updateColorStatusController,
+    readEditColorController,
+    multiDeleteColorController,
+    updateEditColorController
 };

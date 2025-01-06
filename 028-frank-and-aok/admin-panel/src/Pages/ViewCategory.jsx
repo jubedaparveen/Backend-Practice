@@ -22,7 +22,7 @@ const ViewCategory = () => {
     axios.get(`${process.env.REACT_APP_API_URL}admin-panel/parent-category/read-parent-category`)
       .then((response) => {
         // console.log(response.data);
-        setReadParentCategory(response.data.readData)
+        setReadParentCategory(response.data.data)
         // console.log(readParentCategory)
       })
       .catch((error) => {

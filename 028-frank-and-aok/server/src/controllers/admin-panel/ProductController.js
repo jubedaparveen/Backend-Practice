@@ -12,11 +12,12 @@ const createProductController = async (req, res) =>{
 
             if(req.files.images) data.images = req.files.images.map((image)=> image.filename);
         }
+        // console.log(data);
         const datasave = new ProductModel(data);
         const response = await datasave.save();
-
         console.log(response);
         res.status(200).json({message: 'Procuct Added Successfully', data: response});
+        // res.status(200).json({message: 'success', data: response});
     }
     catch(error){
         console.log(error);
@@ -27,7 +28,7 @@ const createProductController = async (req, res) =>{
 const readProductController = async (req, res) =>{
 
     try{
-        const data = await ProductModel.find().populate('parent_category', 'Product_Category', 'Sizes', 'Colors_Category');
+        const data = await ProductModel.find().populate('parent_category', 'Product_Category', 'sizes', 'Colors_Category');
         const filepath = `${req.protocol}://${req.get('host')}/fran-and-oak-admin-files/`;
         res.status(200).json({message: 'Product Added in Veiw Page successflly', data, filepath });
     }
@@ -64,7 +65,7 @@ const editReadProductController = async (req, res) =>{
         console.log(req.params)
         const data = await ProductModel.findOne(req.params);
         const filepath = `${req.protocol}://${req.get('host')}/fran-and-oak-admin-files/`;
-        res.status(200).json({message: 'Edited Data Updated successfully', data:'', filepath:''});
+        res.status(200).json({message: 'Edited Data Updated successfully', data, filepath:''});
         // console.log(data);
     }
     catch(error){

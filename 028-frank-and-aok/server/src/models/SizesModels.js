@@ -28,6 +28,6 @@ SizesSchema.pre('updateOne', function(){
 })
 
 // Sizes is collection mane
-const SizesModel = mongoose.model('Sizes', SizesSchema);
+const SizesModel = mongoose.model('sizes', SizesSchema);
 
 module.exports = SizesModel; 

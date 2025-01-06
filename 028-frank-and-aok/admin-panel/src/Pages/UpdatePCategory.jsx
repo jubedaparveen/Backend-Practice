@@ -56,6 +56,7 @@ const UpdatePCategory = () => {
             Navigation('/dashboard/products/view-category');
           }
         });
+        
       })
       .catch((error) => {
         console.log(error);

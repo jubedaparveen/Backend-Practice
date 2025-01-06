@@ -90,7 +90,7 @@ const verifyOtpEmailUpdateController = async (req, res) => {
             { $set:{email: req.body.newemail}}
         );
 
-        res.status(200).json({messahe: 'success', data});
+        res.status(200).json({message: 'success', data});
     }
     catch(error){
         console.log(error);

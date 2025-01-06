@@ -1,18 +1,63 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Select from "react-select/base";
+import Select from "react-select";
 
 const UpdateProduct = () => {
   const { id } = useParams();
 
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({ images: [] });
   const [filepath, setFilePath] = useState("");
-  const [imagePreview, setImagePreview] = useState(null);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedColorsOption, setSelectedColorsOption] = useState(null);
+  const [activeParentCategory, setActiveParentCategory] = useState([]);
+  const [productCategories, setProductCategories] = useState([]);
+  const [imagePreview, setImagePreview] = useState({ images: [] });
+
+  const handleImagePreview = (e) => {
+    const { name, files } = e.target;
+
+    if (name === "images") {
+      const images = Array.from(files).map((file) => URL.createObjectURL(file));
+      console.log(images);
+      setImagePreview({ ...imagePreview, images: images });
+      return;
+    }
+
+    const preImage = URL.createObjectURL(files[0]);
+    setImagePreview({ ...imagePreview, [name]: preImage });
+    console.log(preImage);
+  };
+
+  const fatchActiveParentCategoey = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}admin-panel/parent-category/active-parent-category`
+      )
+      .then((response) => {
+        console.log(response.data);
+        setActiveParentCategory(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const fetchProductCategories = (e) => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}admin-panel/product-category/product-by-parent-category/${e.target.value}`
+      )
+      .then((response) => {
+        console.log(response.data);
+        setProductCategories(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const fatchProduct = () => {
     axios
@@ -20,23 +65,23 @@ const UpdateProduct = () => {
         `${process.env.REACT_APP_API_URL}admin-panel/products/edit-read-product/${id}`
       )
       .then((response) => {
-        console.log(response.data);
+        console.log("pre product =>", response.data);
         setProduct(response.data.data);
         setFilePath(response.data.filepath);
 
-        const newArrayColor = response.data.data.map((color) => ({
-          ...color,
-          value: color._id,
-          label: color.color,
-        }));
-        setSelectedColorsOption(newArrayColor);
+        // const newArrayColor = response.data.data.color.map((color) => ({
+        //   ...color,
+        //   value: color._id,
+        //   label: color.color,
+        // }));
+        // setSelectedColorsOption(newArrayColor);
 
-        const newSizeArray = response.data.data.size.map((size) => ({
-          ...size,
-          value: size._id,
-          label: size.name,
-        }));
-        setSelectedOption(newSizeArray);
+        // const newSizeArray = response.data.data.size.map((size) => ({
+        //   ...size,
+        //   value: size._id,
+        //   label: size.name,
+        // }));
+        // setSelectedOption(newSizeArray);
       })
       .catch((error) => {
         console.log(error);
@@ -79,19 +124,13 @@ const UpdateProduct = () => {
   };
 
   useEffect(() => {
+    fatchActiveParentCategoey();
     fatchProduct();
     fetchColors();
     fetchSizes();
   }, [id]);
 
   const handleeditUpdateProduct = () => {};
-
-  const handleImagePreview = (e) => {
-    //this will give uploaded image file
-    const imageFile = e.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    setImagePreview(imageUrl);
-  };
 
   return (
     <div className="w-[90%] mx-auto my-[150px] bg-white rounded-[10px] border">
@@ -110,8 +149,8 @@ const UpdateProduct = () => {
                 setProduct({ ...product, name: e.target.value });
               }}
               type="text"
-              id="product_name"
-              name="product_name"
+              id="name"
+              name="name"
               placeholder="Name"
               className="w-full input border p-2 rounded-[5px] my-[10px]"
             />
@@ -127,7 +166,7 @@ const UpdateProduct = () => {
                 setProduct({ ...product, description: e.target.value });
               }}
               id="product_desc"
-              name="product_desc"
+              name="description"
               placeholder="Description"
               rows={3}
               cols={10}
@@ -147,8 +186,8 @@ const UpdateProduct = () => {
               onChange={(e) => {
                 setProduct({ ...product, short_description: e.target.value });
               }}
-              id="product_short_desc"
-              name="product_short_desc"
+              id="short_description"
+              name="short_description"
               placeholder="Short Description"
               rows={2}
               cols={10}
@@ -163,16 +202,14 @@ const UpdateProduct = () => {
             <input
               onChange={handleImagePreview}
               type="file"
-              id="product_img"
-              name="product_img"
+              id="thumbnail"
+              name="thumbnail"
               className="w-full input border rounded-[5px] my-[10px] category"
             />
           </div>
-          <img
-            src={imagePreview || filepath + product.thumbnail}
-            className="w-40"
-            alt=""
-          />
+       
+            <img src={ filepath + product.thumbnail} className="w-40" alt="" />
+    
 
           <div className="w-full my-[10px]">
             <label htmlFor="image_animation" className="block text-[#303640]">
@@ -181,16 +218,18 @@ const UpdateProduct = () => {
             <input
               onChange={handleImagePreview}
               type="file"
-              id="image_animation"
-              name="image_animation"
+              id="secondary_thumbnail"
+              name="secondary_thumbnail"
               className="w-full input border rounded-[5px] my-[10px] category"
             />
           </div>
-          <img
-            src={imagePreview || filepath + product.secondary_thumbnail}
-            className="w-40"
-            alt=""
-          />
+          {imagePreview.secondary_thumbnail && (
+            <img
+              src={filepath + imagePreview.secondary_thumbnail}
+              className="w-40"
+              alt=""
+            />
+          )}
 
           <div className="w-full my-[10px]">
             <label htmlFor="product_gallery" className="block text-[#303640]">
@@ -199,19 +238,17 @@ const UpdateProduct = () => {
             <input
               onChange={handleImagePreview}
               type="file"
-              id="product_gallery"
-              name="product_gallery"
+              id="images"
+              name="images"
               className="w-full input border rounded-[5px] my-[10px] category"
             />
           </div>
-          <div className="grid grid-cols-6 gap-1">
-            {imagePreview !== undefined
-              ? imagePreview.images.map((img) => (
-                  <img src={img.images} className="w-40 border mt-3" />
-                ))
-              : product.images.map((img) => (
-                  <img src={filepath + img.images} className="w-40 mt-3 border" />
-                ))}
+          <div className="grid grid-cols-7 gap-4 ">
+            {imagePreview.images.map((img) => (
+              <div className="border border-slate-400 shadow-md">
+                <img src={img} className="w-40 h-40" alt="" />
+              </div>
+            ))}
           </div>
 
           <div className="w-full my-[10px] grid grid-cols-[2fr_2fr] gap-[20px]">
@@ -225,8 +262,8 @@ const UpdateProduct = () => {
                   setProduct({ ...product, price: e.target.value });
                 }}
                 type="text"
-                id="product_price"
-                name="product_price"
+                id="price"
+                name="price"
                 placeholder="Product Price"
                 className="w-full input border rounded-[5px] my-[10px] p-2"
               />
@@ -241,13 +278,14 @@ const UpdateProduct = () => {
                   setProduct({ ...product, mrp: e.target.value });
                 }}
                 type="text"
-                id="product_mrp"
-                name="product_mrp"
+                id="mrp"
+                name="mrp"
                 placeholder="Product MRP"
                 className="w-full input border rounded-[5px] my-[10px] p-2"
               />
             </div>
           </div>
+
           <div className="w-full my-[10px]">
             <label htmlFor="parent_category" className="block text-[#303640]">
               Select Parent Category
@@ -255,45 +293,33 @@ const UpdateProduct = () => {
             <select
               id="parent_category"
               name="parent_category"
-              value={product.parent_category}
-              onChange={(e) => {
-                setProduct({ ...product, parent_category: e.target.value });
-              }}
+              onChange={fetchProductCategories}
               className="w-full input border p-2 rounded-[5px] my-[10px] cursor-pointer"
             >
-              <option value="default" selected disabled hidden>
-                --Select Parent Category--
-              </option>
-              <option value="men" className="cursor-pointer">
-                Men
-              </option>
-              <option value="women" className="cursor-pointer">
-                Women
-              </option>
+              <option value="defult">----Select Parent Category----</option>
+              {activeParentCategory.map((category, index) => (
+                <option key={index} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
+
           <div className="w-full my-[10px]">
             <label htmlFor="product_category" className="block text-[#303640]">
               Select Product Category
             </label>
             <select
-              value={product.Product_Category}
-              onChange={(e) => {
-                setProduct({ ...product, Product_Category: e.target.value });
-              }}
               id="Product_Category"
-              name="product_category"
+              name="Product_Category"
               className="w-full input border p-2 rounded-[5px] my-[10px] cursor-pointer"
             >
-              <option value="default" selected disabled hidden>
-                --Select Product Category--
-              </option>
-              <option value="tShirt" className="cursor-pointer">
-                T-shirt
-              </option>
-              <option value="shirt" className="cursor-pointer">
-                Shirt
-              </option>
+              <option value="defult">----Select Product Category----</option>
+              {productCategories.map((category, index) => (
+                <option key={index} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="w-full grid grid-cols-[2fr_2fr] gap-[20px]">
@@ -306,8 +332,8 @@ const UpdateProduct = () => {
                 onChange={(e) => {
                   setProduct({ ...product, ifStock: e.target.value });
                 }}
-                name="stock"
-                id="stock"
+                name="ifStock"
+                id="ifStock"
                 className="p-2 input w-full border rounded-[5px] my-[10px]"
               >
                 <option value="default" selected disabled hidden>
@@ -340,7 +366,7 @@ const UpdateProduct = () => {
                 Size
               </label>
               <Select
-                name="size"
+                name="sizes"
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
                 options={sizes}
@@ -383,7 +409,7 @@ const UpdateProduct = () => {
           </div>
           <div className="w-full p-[8px_16px] my-[30px] ">
             <button className="bg-slate-600 rounded-md text-white px-3 py-2">
-              Add Product
+              Update Product
             </button>
           </div>
         </form>

@@ -7,9 +7,6 @@ import { Tooltip } from "react-tooltip";
 import Swal from "sweetalert2";
 
 const ViewProduct = () => {
-  let [showDesc1, setShowDesc1] = useState(false);
-  let [showShortDesc1, setShowShortDesc1] = useState(false);
-
   const [product, setProduct] = useState([]);
   const [filepath, setFilepath] = useState('');
 
@@ -121,47 +118,9 @@ const ViewProduct = () => {
               <td>{product.name}</td>
               <td className="w-[200px] p-2">
                 {product.description}
-                <span
-                  className={
-                    showDesc1 === false ? "font-bold cursor-pointer" : "hidden"
-                  }
-                  onClick={() => setShowDesc1(!showDesc1)}
-                >
-                  ...Read
-                </span>
-                {showDesc1 === false ? (
-                  ""
-                ) : (
-                  <span>
-                    {" "}
-                    Ea explicabo minus doloribus asperiores! Suscipit illum,
-                    assumenda nesciunt libero non ea quos consequatur vel.
-                    Temporibus, nobis perspiciatis veritatis suscipit hic illum!
-                  </span>
-                )}
               </td>
               <td className="w-[200px] p-2">
                {product.short_description}
-                <span
-                  className={
-                    showShortDesc1 === false
-                      ? "font-bold cursor-pointer"
-                      : "hidden"
-                  }
-                  onClick={() => setShowShortDesc1(!showShortDesc1)}
-                >
-                  ...Read
-                </span>
-                {showShortDesc1 === false ? (
-                  ""
-                ) : (
-                  <span>
-                    {" "}
-                    Ea explicabo minus doloribus asperiores! Suscipit illum,
-                    assumenda nesciunt libero non ea quos consequatur vel.
-                    Temporibus, nobis perspiciatis veritatis suscipit hic illum!
-                  </span>
-                )}
               </td>
               <td className="object-contain">
                 <img
